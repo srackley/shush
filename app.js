@@ -7,7 +7,7 @@ var authToken = '9b9d74b0cebac75352a43e0c51a8f9f3';   // Your Auth Token from ww
 
 var client = new twilio(accountSid, authToken);
 
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(bodyParser.json());
 
@@ -15,13 +15,13 @@ app.listen(3000, () => {
   console.log('Naked people on 3000');
 });
 
-app.get('/', function(req, res, next){
+app.post('/:db', function(req, res, next){
     client.messages.create({
-           body: 'You\'re at a ' + req.body + ', and I need you at a 2',
+           body: 'You\'re at a ' + req.params.db + ', and I need you at a 2',
            to: '+13237198259',  // Text this number
            from: '+15182786877', // From a valid Twilio number
            mediaUrl: 'https://media.giphy.com/media/3og0ILz1oLrgFRuzny/giphy.gif'
-       }).then((message) => console.log(message.sid));    
+       }).then((message) => console.log(message.sid));
    });
 
 // app.post('/', function(req, res, next){
@@ -30,5 +30,5 @@ app.get('/', function(req, res, next){
 //         to: '+13237198259',  // Text this number
 //         from: '+15182786877', // From a valid Twilio number
 //         mediaUrl: 'https://media.giphy.com/media/3og0ILz1oLrgFRuzny/giphy.gif'
-//     }).then((message) => console.log(message.sid));    
+//     }).then((message) => console.log(message.sid));
 // });
