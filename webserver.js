@@ -2,6 +2,7 @@
 let tessel = require('tessel');
 // Load the http module to create an http server.
 let http = require('http');
+const twilio = require('twilio');
 
 // Configure our HTTP server to respond with "Hello from Tessel!" to all requests.
 let server = http.createServer((request, response) => {
